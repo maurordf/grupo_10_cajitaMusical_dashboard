@@ -1,36 +1,35 @@
 import React from 'react';
-import ChartRow from './ChartRow';
+import ChartRowUser from './ChartRowUser';
 
 
 
-class Chart extends React.Component {
+class ChartUser extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        products: [{
-        name: '',
-        price: '',
-        category_name: ''
+        users: [{
+        user: '',
+        email: '',
+        url: ''
       }]};
     }
   
     componentDidMount() {
-      fetch('/api/productos')
+      fetch('/api/usuarios')
         .then(response => {
           return response.json()
         })
         .then(data => {
-            console.log(`este es el resultado del the ${Object.values(data.data)}`);
 
-          let products = data.data.map(product=>{
+          let users = data.data.map(user=>{
               return {
-                  title: product.title,
-                  price: product.price,
-                  category_name: product.categoria.category_name
+                user: user.user,
+                  email: user.email,
+                  url: user.url
               }
           });
   
-          return this.setState({ products: products })
+          return this.setState({ users: users })
         })
         .catch(e => { console.log(e) });
     }
@@ -45,15 +44,15 @@ render (){
                         <thead>
                             <tr className='text-blue-600'>
                                 <th>Nombre</th>
-                                <th>Costo</th>
-                                <th>Categoría</th>
+                                <th>Email</th>
+                                <th>URL</th>
                             </tr>
                         </thead>
                       
                         <tbody>
                             {
-                            this.state.products.map( (product , i) => {
-                                return<ChartRow { ...product} key={i}/>
+                            this.state.users.map( (user , i) => {
+                                return<ChartRowUser { ...user} key={i}/>
                             })
                             }
 
@@ -67,4 +66,4 @@ render (){
     )
 }}
 
-export default Chart;
+export default ChartUser;

@@ -20,7 +20,9 @@ class LastMovieInDb extends React.Component {
                     return response.json()
                 })
                 .then(data => {
-                    return this.setState({ productImage: data.data[0].image, productDescription: data.data[0].description })
+                    return this.setState({ 
+                        productImage: data.data[0].image, 
+                        productDescription: data.data[0].description })
                 }).catch(e => { console.log(e) });
 
             }).catch(e => { console.log(e) });
